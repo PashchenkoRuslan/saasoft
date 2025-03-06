@@ -37,12 +37,13 @@ const handleTypeChange = (item: Account, index: number): void => {
     </v-alert>
 
     <v-data-table
-      class="borderless-table"
+      class="borderless_table"
       :items="accountStore.accounts"
       density="compact"
       hide-default-footer
+      no-data-text="Нет данных"
     >
-      <template v-slot:headers>
+      <template v-if="accountStore.accounts.length" v-slot:headers>
         <tr class="no-border-row">
           <th>Метки</th>
           <th>Тип записи</th>
@@ -63,19 +64,20 @@ const handleTypeChange = (item: Account, index: number): void => {
               maxlength="50"
               @blur="handleFieldBlur(item, index)"
               counter
-              hide-details="auto"
+              hide-details
             ></v-text-field>
           </td>
           <td class="table-td">
             <v-select
               v-model="item.type"
               :items="typesRecord"
+              hide-details
               variant="outlined"
               @update:model-value="handleTypeChange(item, index)"
             ></v-select>
           </td>
 
-          <td :colspan="item.type === 'LDAP' ? 2 : 1" class="expanded-login">
+          <td :colspan="item.type === 'LDAP' ? 2 : 1" class="expanded_login">
             <v-text-field
               v-model="item.login"
               placeholder="Логин"
@@ -85,11 +87,11 @@ const handleTypeChange = (item: Account, index: number): void => {
               maxlength="100"
               @blur="handleFieldBlur(item, index)"
               counter
-              hide-details="auto"
+              hide-details
             ></v-text-field>
           </td>
 
-          <td v-if="item.type === 'Локальная'">
+          <td class="password_field" v-if="item.type === 'Локальная'">
             <v-text-field
               v-model="item.password"
               :type="item.showPassword ? 'text' : 'password'"
@@ -100,7 +102,7 @@ const handleTypeChange = (item: Account, index: number): void => {
               maxlength="100"
               @blur="handleFieldBlur(item, index)"
               counter
-              hide-details="auto"
+              hide-details
             >
               <template v-slot:append-inner>
                 <v-btn
@@ -136,19 +138,30 @@ const handleTypeChange = (item: Account, index: number): void => {
 </template>
 
 <style>
-.expanded-login {
+.expanded_login {
   width: 20%;
 }
 
-.borderless-table {
+.password_field {
+  max-width: 300px;
+  width: 100%;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.password_field .borderless_table {
   border: none !important;
 }
-.borderless-table th,
-.borderless-table td {
+.borderless_table th,
+.borderless_table td {
   border: none !important;
 }
 
 td > div {
   margin-bottom: 15px;
+}
+
+.v-text-field .v-input__details {
+  padding-inline: 0 !important;
 }
 </style>
