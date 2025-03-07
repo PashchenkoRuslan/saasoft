@@ -22,7 +22,7 @@ const handleTypeChange = (item: Account, index: number): void => {
 </script>
 
 <template>
-  <v-container>
+  <v-container max-width="1200px">
     <v-card-title class="d-flex align-center mb-5 flex-wrap">
       <span class="text-h6 mr-5">Учетные записи</span>
       <v-btn class="border" @click="accountStore.addAccount">
@@ -54,7 +54,7 @@ const handleTypeChange = (item: Account, index: number): void => {
       </template>
       <template v-slot:item="{ item, index }">
         <tr>
-          <td class="table-td">
+          <td>
             <v-text-field
               v-model="item.tags"
               variant="outlined"
@@ -67,7 +67,7 @@ const handleTypeChange = (item: Account, index: number): void => {
               hide-details
             ></v-text-field>
           </td>
-          <td class="table-td">
+          <td>
             <v-select
               v-model="item.type"
               :items="typesRecord"
