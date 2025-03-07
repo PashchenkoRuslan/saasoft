@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useAccountStore } from "../stores/accounts";
-import { Account } from "../types";
+import type { Account } from "../types";
 
 const accountStore = useAccountStore();
 
@@ -49,7 +49,6 @@ const handleTypeChange = (item: Account, index: number): void => {
           <th>Тип записи</th>
           <th>Логин</th>
           <th>Пароль</th>
-          <th>Действия</th>
         </tr>
       </template>
       <template v-slot:item="{ item, index }">
@@ -77,7 +76,10 @@ const handleTypeChange = (item: Account, index: number): void => {
             ></v-select>
           </td>
 
-          <td :colspan="item.type === 'LDAP' ? 2 : 1" class="expanded_login">
+          <td
+            :colspan="item.type === 'LDAP' ? 2 : 1"
+            :style="item.type === 'LDAP' ? 'width: 45%' : 'width: 20%'"
+          >
             <v-text-field
               v-model="item.login"
               placeholder="Логин"
@@ -138,10 +140,6 @@ const handleTypeChange = (item: Account, index: number): void => {
 </template>
 
 <style>
-.expanded_login {
-  width: 20%;
-}
-
 .password_field {
   max-width: 300px;
   width: 100%;
