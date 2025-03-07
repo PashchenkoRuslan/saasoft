@@ -6,43 +6,7 @@ export const useAccountStore = defineStore("accounts", {
     const storedAccounts = localStorage.getItem("accounts");
     const initialAccounts: Account[] = storedAccounts
       ? JSON.parse(storedAccounts)
-      : [
-          {
-            tags: "XXX",
-            type: "Локальная",
-            login: "Значение",
-            password: "password",
-            errors: {},
-          },
-          {
-            tags: "XXX; YYYYYYYYYY; IIIIIIIIII; MMMMMMMMMM",
-            type: "Локальная",
-            login: "Значение",
-            password: "password",
-            errors: {},
-          },
-          {
-            tags: "XXX",
-            type: "Локальная",
-            login: "Значение",
-            password: "password",
-            errors: {},
-          },
-          {
-            tags: "Значение",
-            type: "LDAP",
-            login: "Значение",
-            password: null,
-            errors: {},
-          },
-          {
-            tags: "Значение",
-            type: "LDAP",
-            login: "Значение",
-            password: null,
-            errors: {},
-          },
-        ];
+      : [];
 
     return {
       accounts: initialAccounts,
